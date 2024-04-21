@@ -10,14 +10,24 @@ struct Car {
         self.numberOfSeats = numberOfSeats
     }
     
-    mutating func shiftGears(to gear: Int) {
-        if gear >= 1 && gear <= 10 {
-            self.gear = gear
+    mutating func shiftGearsUp() {
+        if self.gear < 10 {
+            self.gear += 1
+        }
+    }
+    
+    mutating func shiftGearsDown() {
+        if self.gear > 1 {
+            self.gear -= 1
         }
     }
 }
 
 var deLorean = Car(model: "1981 DeLorean DMC-12", numberOfSeats: 2)
 print("Current gear: \(deLorean.gear)")
-deLorean.shiftGears(to: 2)
+deLorean.shiftGearsUp()
+print("Current gear is now: \(deLorean.gear)")
+deLorean.shiftGearsDown()
+print("Current gear is now: \(deLorean.gear)")
+deLorean.shiftGearsDown()
 print("Current gear is now: \(deLorean.gear)")
