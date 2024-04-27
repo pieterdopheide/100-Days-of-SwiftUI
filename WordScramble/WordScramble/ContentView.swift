@@ -16,12 +16,18 @@ struct ContentView: View {
     @State private var errorMessage = ""
     @State private var showingError = false
     
+    @State private var score = 0
+    
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .textInputAutocapitalization(.never)
+                }
+                
+                Section {
+                    Text("Score: \(score)")
                 }
                 
                 Section {
@@ -38,6 +44,11 @@ struct ContentView: View {
             .onAppear(perform: startGame)
             .alert(errorTitle, isPresented: $showingError) { } message: {
                 Text(errorMessage)
+            }
+            .toolbar {
+                Button("Restart") {
+                    startGame()
+                }
             }
         }
     }
@@ -64,6 +75,18 @@ struct ContentView: View {
             return
         }
         
+        guard isLongEnough(word: answer) else {
+            wordError(title: "Word is to short", message: "Your answer should be 3 letters or longer")
+            return
+        }
+        
+        guard isNotRootWord(word: answer) else {
+            wordError(title: "Word is the same as root word", message: "Your word can't be the same as the given word")
+            return
+        }
+        
+        addToScore(word: answer)
+        
         withAnimation {
             usedWords.insert(answer, at: 0)
         }
@@ -75,6 +98,9 @@ struct ContentView: View {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 let allWords = startWords.components(separatedBy: "\n")
                 rootWord = allWords.randomElement() ?? "silkworm"
+                
+                usedWords = [String]()
+                score = 0
                 return
             }
         }
@@ -111,6 +137,18 @@ struct ContentView: View {
         errorTitle = title
         errorMessage = message
         showingError = true
+    }
+    
+    func isLongEnough(word: String) -> Bool {
+        word.count >= 3
+    }
+    
+    func isNotRootWord(word: String) -> Bool {
+        rootWord != word
+    }
+    
+    func addToScore(word: String) {
+        score += word.count
     }
 }
 
