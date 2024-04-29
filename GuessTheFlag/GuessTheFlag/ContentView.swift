@@ -19,6 +19,11 @@ struct ContentView: View {
     @State private var questionsAsked = 0
     @State private var gameOver = false
     
+    @State private var animationAmount = 0.0
+    @State private var opacity = 1.0
+    @State private var scale = 1.0
+    @State private var flagTapped = 0
+    
     let questionsToAsk = 8
     
     var body: some View {
@@ -51,9 +56,21 @@ struct ContentView: View {
                     ForEach(0..<3) { number in
                         Button {
                             flagTapped(number)
+                            
+                            flagTapped = number
+                            withAnimation {
+                                animationAmount += 360
+                                opacity -= 0.75
+                                scale = 0.5
+                            }
                         } label: {
                             FlagImage(countryName: countries[number])
                         }
+                        .opacity(flagTapped != number ? opacity : 1)
+                        .rotation3DEffect(
+                            .degrees(flagTapped == number ? animationAmount : 0), axis: (x: 0, y: 1, z: 0)
+                        )
+                        .scaleEffect(flagTapped != number ? scale : 1)
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -123,6 +140,10 @@ Your score is \(score)
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         questionsAsked += 1
+        
+        animationAmount = 0.0
+        opacity = 1.0
+        scale = 1.0
     }
     
     func restartGame() {
