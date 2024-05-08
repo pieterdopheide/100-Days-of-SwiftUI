@@ -15,10 +15,15 @@ class Order: Codable {
         case _specialRequestEnabled = "specialRequestEnabled"
         case _extraFrosting = "extraFrosting"
         case _addSprinkles = "addSprinkles"
-        case _name = "name"
-        case _city = "city"
-        case _streetAddress = "streetAddress"
-        case _zip = "zip"
+        case _address = "address"
+    }
+    
+    init() {
+        if let savedAddress = UserDefaults.standard.data(forKey: "Address") {
+            if let decodedAddress = try? JSONDecoder().decode(Address.self, from: savedAddress) {
+                address = decodedAddress
+            }
+        }
     }
     
     static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
@@ -37,17 +42,12 @@ class Order: Codable {
     var extraFrosting = false
     var addSprinkles = false
     
-    var name = ""
-    var streetAddress = ""
-    var city = ""
-    var zip = ""
-    
-    var hasValidAddress: Bool {
-        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty {
-            return false
+    var address = Address() {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(address) {
+                UserDefaults.standard.set(encoded, forKey: "Address")
+            }
         }
-        
-        return true
     }
     
     var cost: Decimal {
