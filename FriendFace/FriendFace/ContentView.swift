@@ -5,10 +5,12 @@
 //  Created by Dopheide,Pieter on 21/05/2024.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var users = [User]()
+    @Environment(\.modelContext) var modelContext
+    @Query var users: [User]
     
     var body: some View {
         NavigationStack {
@@ -48,7 +50,13 @@ struct ContentView: View {
             decoder.dateDecodingStrategy = .iso8601
             
             if let decodedResponse = try? decoder.decode([User].self, from: data) {
-                users = decodedResponse
+                
+                // The insert should (probably) be improved to insert
+                // in a batch. Currently the UI updates with each
+                // insert which isn't a nice user experience.
+                for user in decodedResponse {
+                    modelContext.insert(user)
+                }
             }
         } catch {
             print("Invalid data")
