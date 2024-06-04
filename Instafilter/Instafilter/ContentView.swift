@@ -14,6 +14,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
+    @State private var radius = 0.5
     @State private var selectedItem: PhotosPickerItem?
     @State private var showingFilters = false
     
@@ -46,10 +47,19 @@ struct ContentView: View {
                     Text("Intensity")
                     Slider(value: $filterIntensity)
                         .onChange(of: filterIntensity, applyProcessing)
+                        .disabled(selectedItem == nil)
+                }
+                
+                HStack {
+                    Text("Radius")
+                    Slider(value: $radius)
+                        .onChange(of: radius, applyProcessing)
+                        .disabled(selectedItem == nil)
                 }
                 
                 HStack {
                     Button("Change filter", action: changeFilter)
+                        .disabled(selectedItem == nil)
                     
                     Spacer()
                     
@@ -68,6 +78,9 @@ struct ContentView: View {
                 Button("Sepia Tone") { setFilter(CIFilter.sepiaTone()) }
                 Button("Unsharp Mask") { setFilter(CIFilter.unsharpMask()) }
                 Button("Vignette") { setFilter(CIFilter.vignette()) }
+                Button("Bloom") { setFilter(CIFilter.bloom()) }
+                Button("Hatched Screen") { setFilter(CIFilter.hatchedScreen()) }
+                Button("X-Ray") { setFilter(CIFilter.xRay()) }
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -95,7 +108,7 @@ struct ContentView: View {
             currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
         }
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radius * 200, forKey: kCIInputRadiusKey)
         }
         if inputKeys.contains(kCIInputScaleKey) {
             currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey)
