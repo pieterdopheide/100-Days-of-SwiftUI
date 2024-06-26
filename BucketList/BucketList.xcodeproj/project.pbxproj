@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951A28AB2C2C037F0003B82C /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951A28AA2C2C037F0003B82C /* ContentView-ViewModel.swift */; };
 		959759022C2BECDA00780421 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959759012C2BECDA00780421 /* EditView.swift */; };
 		959759042C2BF08800780421 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959759032C2BF08800780421 /* Result.swift */; };
 		95B23A202C231F7800D06754 /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B23A1F2C231F7800D06754 /* BucketListApp.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		951A28AA2C2C037F0003B82C /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
 		959759012C2BECDA00780421 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		959759032C2BF08800780421 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		95B23A1C2C231F7800D06754 /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 				95B23A1F2C231F7800D06754 /* BucketListApp.swift */,
 				95B23A212C231F7800D06754 /* ContentView.swift */,
 				959759012C2BECDA00780421 /* EditView.swift */,
+				951A28AA2C2C037F0003B82C /* ContentView-ViewModel.swift */,
 				95B23A2D2C23218800D06754 /* Location.swift */,
 				959759032C2BF08800780421 /* Result.swift */,
 				95B23A232C231F8600D06754 /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95B23A222C231F7800D06754 /* ContentView.swift in Sources */,
+				951A28AB2C2C037F0003B82C /* ContentView-ViewModel.swift in Sources */,
 				959759042C2BF08800780421 /* Result.swift in Sources */,
 				95B23A2E2C23218800D06754 /* Location.swift in Sources */,
 				959759022C2BECDA00780421 /* EditView.swift in Sources */,
@@ -291,6 +295,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -319,6 +324,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
