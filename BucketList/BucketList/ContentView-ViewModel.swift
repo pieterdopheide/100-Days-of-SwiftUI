@@ -17,6 +17,10 @@ extension ContentView {
         var selectedPlace: Location?
         var isUnlocked = false
         
+        var unlockFailed = false
+        let unlockFailedAlertTitle = "Cannot Unlock Places"
+        var unlockFailedAlertMessage = ""
+        
         let savePath = URL.documentsDirectory.appending(path: "SavedPlaces")
         
         init() {
@@ -64,10 +68,14 @@ extension ContentView {
                         self.isUnlocked = true
                     } else {
                         // error
+                        self.unlockFailedAlertMessage = "Failed to unlock places: \(error?.localizedDescription ?? "unknow error")"
+                        self.unlockFailed = true
                     }
                 }
             } else {
                 // no biometrics
+                self.unlockFailedAlertMessage = "Failed to unlock places: no biometrics available."
+                unlockFailed = true
             }
         }
     }
