@@ -26,6 +26,9 @@ struct ExpenseView: View {
             Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                 .expenseStyle(for: item)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(item.name) costing \(item.amount)")
+        .accessibilityHint(item.type)
     }
 }
 
