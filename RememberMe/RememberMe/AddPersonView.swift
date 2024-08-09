@@ -5,6 +5,7 @@
 //  Created by Dopheide,Pieter on 09/08/2024.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct AddPersonView: View {
@@ -12,6 +13,8 @@ struct AddPersonView: View {
     @Environment(\.dismiss) var dismiss
     
     var selectedImage: Data
+    
+    let locationFetcher = LocationFetcher()
     
     @State private var name = ""
     
@@ -35,14 +38,23 @@ struct AddPersonView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let person = Person(name: name, photo: selectedImage)
+                        var location: Coordinate2D? = nil
+                        if let currentLocation = locationFetcher.lastKnownLocation {
+                            location = Coordinate2D(currentLocation)
+                        }
+                        
+                        let person = Person(name: name, photo: selectedImage, location: location)
                         modelContext.insert(person)
+                        
                         dismiss()
                     }
                     .disabled(name.isEmpty)
                 }
             }
             .navigationBarBackButtonHidden()
+            .onAppear() {
+                locationFetcher.start()
+            }
         }
     }
     
