@@ -53,11 +53,13 @@ struct ProspectsView: View {
                         Picker("Sort", selection: $sortOrder) {
                             Text("Sort by Name")
                                 .tag([
-                                    SortDescriptor(\Prospect.name)
+                                    SortDescriptor(\Prospect.name),
+                                    SortDescriptor(\Prospect.createdDate)
                                 ])
                             Text("Most Recent")
                                 .tag([
-                                    SortDescriptor(\Prospect.createdDate)
+                                    SortDescriptor(\Prospect.createdDate),
+                                    SortDescriptor(\Prospect.name)
                                 ])
                         }
                     }
