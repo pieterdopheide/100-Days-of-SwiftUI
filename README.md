@@ -133,7 +133,7 @@
 - [x] Day 91
 - [x] Day 92
 - [x] Day 93
-- [ ] Day 94
+- [x] Day 94
 
 ## Days 95: Consolidation VII
 
