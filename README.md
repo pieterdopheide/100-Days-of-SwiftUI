@@ -141,7 +141,7 @@
 
 ## Days 96-99: One last project
 
-- [ ] Day 96
+- [x] Day 96
 - [ ] Day 97
 - [ ] Day 98
 - [ ] Day 99
