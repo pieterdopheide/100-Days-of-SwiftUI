@@ -137,7 +137,7 @@
 
 ## Days 95: Consolidation VII
 
-- [ ] Day 95
+- [x] Day 95
 
 ## Days 96-99: One last project
 
