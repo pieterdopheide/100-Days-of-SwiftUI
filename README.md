@@ -143,7 +143,7 @@
 
 - [x] Day 96
 - [x] Day 97
-- [ ] Day 98
+- [x] Day 98
 - [ ] Day 99
 
 ## Wrap up
