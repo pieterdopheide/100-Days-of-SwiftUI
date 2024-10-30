@@ -23,6 +23,7 @@ struct ResortView: View {
                 Image(decorative: resort.id)
                     .resizable()
                     .scaledToFit()
+                    .photoCredit(with: resort.imageCredit)
                 
                 HStack {
                     if horizontalSizeClass == .compact && dynamicTypeSize > .large {

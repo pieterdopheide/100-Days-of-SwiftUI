@@ -15,11 +15,14 @@ struct ContentView: View {
     
     var filteredResorts: [Resort] {
         if searchText.isEmpty {
-            resorts
+            sortResorts(resorts)
         } else {
-            resorts.filter { $0.name.localizedStandardContains(searchText) }
+            sortResorts(resorts.filter { $0.name.localizedStandardContains(searchText) })
         }
     }
+    
+    var resortOrders = ["Default", "Alphabetical", "Country"]
+    @State private var selectedResortOrder = "Default"
     
     var body: some View {
         NavigationSplitView {
@@ -59,10 +62,34 @@ struct ContentView: View {
                 ResortView(resort: resort)
             }
             .searchable(text: $searchText, prompt: "Search for a resort")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Picker("Order to display resorts", selection: $selectedResortOrder) {
+                            ForEach(resortOrders, id: \.self) {
+                                Text($0)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+            }
         } detail: {
             WelcomeView()
         }
         .environment(favorites)
+    }
+    
+    func sortResorts(_ resorts: [Resort]) -> [Resort] {
+        switch selectedResortOrder {
+        case "Alphabetical":
+            return resorts.sorted { $0.name < $1.name }
+        case "Country":
+            return resorts.sorted { $0.country < $1.country }
+        default:
+            return resorts
+        }
     }
 }
 
